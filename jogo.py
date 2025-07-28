@@ -19,22 +19,6 @@ class JogoFlask:
                 reader = csv.DictReader(f)
                 self.perguntas = [row for row in reader]
 
-    def cadastrar_pergunta(self, pergunta, resposta, versiculo):
-        novo_id = str(len(self.perguntas) + 1)
-        nova = {
-            'id': novo_id,
-            'pergunta': pergunta.strip(),
-            'resposta': resposta.strip(),
-            'versiculo': versiculo.strip()
-        }
-
-        with open(self.arquivo, mode='a', newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=['id', 'pergunta', 'resposta', 'versiculo'])
-            writer.writerow(nova)
-        
-        self.perguntas.append(nova)
-        return novo_id
-
     def obter_perguntas(self):
         self._carregar_perguntas()
         return self.perguntas

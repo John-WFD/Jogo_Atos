@@ -18,22 +18,6 @@ def index():
                          total_perguntas=total_perguntas,
                          usadas=usadas)
 
-@app.route('/cadastrar', methods=['GET', 'POST'])
-def cadastrar():
-    if request.method == 'POST':
-        pergunta = request.form['pergunta']
-        resposta = request.form['resposta']
-        versiculo = request.form['versiculo']
-        
-        if pergunta and resposta and versiculo:
-            novo_id = jogo.cadastrar_pergunta(pergunta, resposta, versiculo)
-            flash(f'Pergunta {novo_id} cadastrada com sucesso!', 'success')
-            return redirect(url_for('cadastrar'))
-        else:
-            flash('Todos os campos são obrigatórios!', 'error')
-    
-    return render_template('cadastrar.html')
-
 @app.route('/perguntas')
 def listar_perguntas():
     perguntas = jogo.obter_perguntas()
