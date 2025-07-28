@@ -3,7 +3,6 @@ import os
 from jogo import JogoFlask
 
 app = Flask(__name__)
-app.secret_key = 'John'
 
 # Instância global do jogo
 jogo = JogoFlask()
@@ -94,6 +93,3 @@ def status():
         'usadas': usadas,
         'restantes': total_perguntas - usadas
     })
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8080)
