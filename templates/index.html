@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body text-center">
+                <h1 class="card-title mb-4">🙏 Bem-vindo ao Jogo Bíblico</h1>
+                <p class="card-text mb-4">Teste seus conhecimentos bíblicos com perguntas e versículos!</p>
+                
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ total_perguntas }}</h5>
+                                <p class="card-text">Perguntas Cadastradas</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if tem_jogo_salvo %}
+                    <div class="col-md-4">
+                        <div class="card bg-info text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ usadas }}</h5>
+                                <p class="card-text">Já Respondidas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ total_perguntas - usadas }}</h5>
+                                <p class="card-text">Restantes</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="{{ url_for('cadastrar') }}" class="btn btn-outline-primary btn-lg">
+                        ➕ Cadastrar Pergunta
+                    </a>
+                    <a href="{{ url_for('listar_perguntas') }}" class="btn btn-outline-secondary btn-lg">
+                        📋 Ver Perguntas
+                    </a>
+                    
+                    {% if tem_jogo_salvo %}
+                        <a href="{{ url_for('continuar_jogo') }}" class="btn btn-success btn-lg">
+                            ▶️ Continuar Jogo
+                        </a>
+                        <a href="{{ url_for('novo_jogo') }}" class="btn btn-warning btn-lg">
+                            🔄 Novo Jogo
+                        </a>
+                    {% else %}
+                        {% if total_perguntas > 0 %}
+                            <a href="{{ url_for('jogar') }}" class="btn btn-primary btn-lg">
+                                🎮 Iniciar Jogo
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

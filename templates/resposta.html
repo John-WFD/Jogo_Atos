@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Resposta - Jogo Bíblico{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3>✅ Resposta da Pergunta #{{ pergunta.id }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-secondary" role="alert">
+                    <h5>Pergunta:</h5>
+                    <p>{{ pergunta.pergunta }}</p>
+                </div>
+                
+                {% if resposta_usuario %}
+                <div class="alert alert-info" role="alert">
+                    <h5>Sua resposta:</h5>
+                    <p>{{ resposta_usuario }}</p>
+                </div>
+                {% endif %}
+                
+                <div class="alert alert-success" role="alert">
+                    <h5>Resposta correta:</h5>
+                    <p><strong>{{ pergunta.resposta }}</strong></p>
+                    <hr>
+                    <p class="mb-0"><em>Versículo: {{ pergunta.versiculo }}</em></p>
+                </div>
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="{{ url_for('jogar') }}" class="btn btn-primary btn-lg">
+                        ➡️ Próxima Pergunta
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                        🏠 Voltar ao Início
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

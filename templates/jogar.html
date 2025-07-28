@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Jogando - Jogo Bíblico{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>🎮 Pergunta #{{ pergunta.id }}</h3>
+                <div id="status-badge" class="badge bg-info">Carregando...</div>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-primary" role="alert">
+                    <h4 class="alert-heading">{{ pergunta.pergunta }}</h4>
+                </div>
+                
+                <form method="POST" action="{{ url_for('resposta') }}">
+                    <div class="mb-3">
+                        <label for="resposta" class="form-label">Sua resposta:</label>
+                        <textarea class="form-control" id="resposta" name="resposta" rows="3" 
+                                placeholder="Digite sua resposta aqui..."></textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary">🏠 Voltar ao Início</a>
+                        <button type="submit" class="btn btn-primary">✅ Ver Resposta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Atualiza o status do jogo
+function atualizarStatus() {
+    fetch('/status')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('status-badge').textContent = 
+                `${data.restantes} restantes de ${data.total}`;
+        });
+}
+
+// Atualiza na carga da página
+atualizarStatus();
+</script>
+{% endblock %}

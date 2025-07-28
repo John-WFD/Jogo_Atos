@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Perguntas Cadastradas - Jogo Bíblico{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>📋 Perguntas Cadastradas ({{ perguntas|length }})</h3>
+                <a href="{{ url_for('cadastrar') }}" class="btn btn-primary">➕ Nova Pergunta</a>
+            </div>
+            <div class="card-body">
+                {% if perguntas %}
+                    <div class="row">
+                        {% for pergunta in perguntas %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">ID: {{ pergunta.id }}</h6>
+                                    <h5 class="card-title">{{ pergunta.pergunta }}</h5>
+                                    <p class="card-text">
+                                        <strong>Resposta:</strong> {{ pergunta.resposta }}<br>
+                                        <strong>Versículo:</strong> <em>{{ pergunta.versiculo }}</em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <h4>Nenhuma pergunta cadastrada</h4>
+                        <p class="text-muted">Cadastre algumas perguntas para começar a jogar!</p>
+                        <a href="{{ url_for('cadastrar') }}" class="btn btn-primary">➕ Cadastrar Primeira Pergunta</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
