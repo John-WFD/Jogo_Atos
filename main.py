@@ -118,7 +118,7 @@ class Jogo:
                     writer = csv.writer(f)
                     writer.writerow([pergunta['id']])
 
-            if 111 < int(pergunta['id']):
+            if 126 < int(pergunta['id']):
                 print(f"\nID: {pergunta['id']}")
                 print(f"\nPergunta: {pergunta['pergunta']}")
                 input("Sua resposta: ")
